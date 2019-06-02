@@ -18,7 +18,7 @@ node {
 		try {
 			sh "aws s3api create-bucket --bucket ${S3_BUCKET} --create-bucket-configuration  LocationConstraint=${REGION}"
 		}
-		catch {
+		catch (exc) {
 			sh "echo 's3 bucket already exists'"		
 		}
 		
