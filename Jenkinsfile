@@ -13,18 +13,7 @@ node {
 	
 	def lambdaVersion = ''
 	
-	stage('MyTest'){
-		sh "echo 'about to create s3'"		
-		try {
-			sh "aws s3api create-bucket --bucket ${S3_BUCKET} --create-bucket-configuration  LocationConstraint=${REGION}"
-		}
-		catch (exc) {
-			sh "echo 's3 bucket already exists'"		
-		}
-		
-    }
-	
- /*   stage('Checkout'){
+    stage('Checkout'){
         checkout scm
     }
 	
@@ -44,10 +33,14 @@ node {
 
 		sh "$DOTNET_PATH/dotnet-lambda list-functions"
 		
-		//sh "aws --region ${REGION} cloudformation create-stack --stack-name ${FUNCTION_NAME}"
 		sh "echo 'about to create s3'"		
-		sh "aws s3api create-bucket --bucket ${S3_BUCKET} --create-bucket-configuration  LocationConstraint=${REGION}"
-		
+		try {
+			sh "aws s3api create-bucket --bucket ${S3_BUCKET} --create-bucket-configuration  LocationConstraint=${REGION}"
+		}
+		catch (exc) {
+			sh "echo 's3 bucket already exists'"		
+		}
+	
 		sh "echo 'about to deploy lambda'"		
 		dir("${APP_MAIN_FOLDER}") {
 			//sh "$DOTNET_PATH/dotnet-lambda deploy-function DotNetCoreWithTest1 --function-role JenkinsBuildRole"
@@ -111,5 +104,4 @@ node {
 		}
 	}	
 	
-	*/
 }
