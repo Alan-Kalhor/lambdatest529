@@ -13,7 +13,20 @@ node {
 	
 	def lambdaVersion = ''
 	
-    stage('Checkout'){
+	stage('MyTest'){
+		def is_s3bucket_existing = sh(
+			script: "aws s3api head-bucket --bucket ${S3_BUCKET}",
+			returnStdout: true
+		)
+		if (!is_s3bucket_existing.equals("")) {
+			sh "echo 's3 does not exists'"		
+		} else {
+			sh "echo 's3 exists'"		
+		}
+		
+    }
+	
+ /*   stage('Checkout'){
         checkout scm
     }
 	
@@ -100,5 +113,5 @@ node {
 		}
 	}	
 	
-	
+	*/
 }
