@@ -14,14 +14,12 @@ node {
 	def lambdaVersion = ''
 	
 	stage('MyTest'){
-		def is_s3bucket_existing = sh(
-			script: "aws s3api head-bucket --bucket ${S3_BUCKET}",
-			returnStdout: true
-		)
-		if (!is_s3bucket_existing.equals("")) {
-			sh "echo 's3 does not exists'"		
-		} else {
-			sh "echo 's3 exists'"		
+		sh "echo 'about to create s3'"		
+		try {
+			sh "aws s3api create-bucket --bucket ${S3_BUCKET} --create-bucket-configuration  LocationConstraint=${REGION}"
+		}
+		catch {
+			sh "echo 's3 bucket already exists'"		
 		}
 		
     }
