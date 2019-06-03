@@ -31,7 +31,7 @@ namespace lambdatest529.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[\"AU\",\"NZ\"]", response.Body);
+            Assert.Equal("[\"AU2\",\"NZ2\"]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }

@@ -13,7 +13,7 @@ namespace lambdatest529.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "AU", "NZ" };
+            return new string[] { "AU2", "NZ2" };
         }
 
         // GET api/values/5
